@@ -8,23 +8,28 @@
 #ifndef ANT_H_
 #define ANT_H_
 
+#include <iostream>
+#include <cassert>
 #include "AntResources.h"
 #include "World.h"
 
 class Ant {
 private:
-	const World world;
 
+	World world;
 	Location location;
-	Direction direction;
+	Direction dirOriented;
 
 
 public:
 
-	Ant(const World &pWorld, Location pLoc, Direction pDir = NORTH);
-
+	Ant(World pWorld, Location pLoc, Direction pOrient = NORTH);
 
 	virtual ~Ant();
+
+	void layPheromone(Pheromone pheromone, int amount);
+
+	void move(Direction direction);
 };
 
 #endif /* ANT_H_ */

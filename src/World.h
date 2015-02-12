@@ -8,14 +8,24 @@
 #ifndef WORLD_H_
 #define WORLD_H_
 
+#include <cassert>
+#include <iostream>
+#include "AntResources.h"
+
 class World {
 private:
 	const int HEIGHT;
 	const int WIDTH;
 
-public:
-	World(const int &height, const int &width);
-	virtual ~World();
-};
+	GridData **gridData;
 
+public:
+	World(const int &height = 100, const int &width = 100);
+
+	virtual ~World();
+
+	void deltaPheromone(Pheromone pheromone, Location location, int change);
+
+	void debug();
+};
 #endif /* WORLD_H_ */

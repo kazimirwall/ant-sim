@@ -7,9 +7,13 @@
 //============================================================================
 
 #include <iostream>
+#include "World.h"
 using namespace std;
 
 int main() {
 	cout << "Lets make antz" << endl; // prints Lets make antz
+
+	World *world = new World(10, 10);
+	world->debug();
 	return 0;
 }
