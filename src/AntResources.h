@@ -8,6 +8,10 @@
 #ifndef ANTRESOURCES_H_
 #define ANTRESOURCES_H_
 
+#include <string>
+
+const int NUM_DIRECTIONS = 8;
+
 
 /**
  * Directions define the orientation of an ant. North is up, east is right, etc.
@@ -21,8 +25,11 @@ enum Direction {
 	SOUTH,
 	SOUTHWEST,
 	WEST,
-	NORTHWEST
+	NORTHWEST,
 };
+
+
+std::string dirName(Direction direction);
 
 
 /**
@@ -30,8 +37,11 @@ enum Direction {
  */
 enum Pheromone {
 	FOOD,
-	HOME
+	HOME,
 };
+
+
+std::string pheromoneName(Pheromone pheromone);
 
 
 /**
@@ -50,7 +60,7 @@ struct GridData {
 	int homePheromone;
 	int foodPheromone;
 	int nFood;
-	bool isHome;		// If you can think of a better name then yeah
+	bool isHive;		// If you can think of a better name then yeah
 };
 
 

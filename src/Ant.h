@@ -19,7 +19,15 @@ private:
 	World world;
 	Location location;
 	Direction dirOriented;
+	int ID;
 
+	// Keeps track of the number of Ant objects made and delegates IDs
+	// in the constructor.
+	static int numAnts;
+
+	void move(Direction direction, bool debug = false);
+
+	Location translateDirection(const Location &loc, Direction direction, bool debug = false);
 
 public:
 
@@ -27,9 +35,11 @@ public:
 
 	virtual ~Ant();
 
-	void layPheromone(Pheromone pheromone, int amount);
+	void layPheromone(Pheromone pheromone, int amount, bool debug = false);
 
-	void move(Direction direction);
+	void update(bool debug = false);
+
+	Location* isLookingAt(bool debug = false);
 };
 
 #endif /* ANT_H_ */

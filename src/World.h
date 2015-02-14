@@ -27,5 +27,9 @@ public:
 	void deltaPheromone(Pheromone pheromone, Location location, int change);
 
 	void debug();
+
+	const int getHeight() const { return HEIGHT; }
+
+	const int getWidth() const { return WIDTH; }
 };
 #endif /* WORLD_H_ */
