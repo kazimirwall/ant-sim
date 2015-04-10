@@ -10,8 +10,8 @@
 int Ant::numAnts = 0;
 
 
-Ant::Ant(World pWorld, Location pLoc, Direction pOrient)
-		: world(pWorld), location(pLoc), dirOriented(pOrient) {
+Ant::Ant(World pWorld, Location pLoc, Direction pOrient, bool debug)
+		: world(pWorld), location(pLoc), dirOriented(pOrient), DEBUG(debug) {
 
 	// Check inputs
 
@@ -34,9 +34,9 @@ Ant::~Ant() {
 }
 
 
-void Ant::layPheromone(Pheromone pheromone, int amount, bool debug) {
+void Ant::layPheromone(Pheromone pheromone, int amount) {
 
-	if (debug) {
+	if (DEBUG) {
 		using namespace std;
 		cout << "Laying pheromone " << pheroName(pheromone) << " at location: ";
 		cout << location.x << ", " << location.y << endl;
@@ -46,10 +46,10 @@ void Ant::layPheromone(Pheromone pheromone, int amount, bool debug) {
 }
 
 
-void Ant::update(bool debug) {
-	Location *lookingAt = isLookingAt(debug);
+void Ant::update() {
+	Location *lookingAt = isLookingAt();
 
-	if (debug) {
+	if (DEBUG) {
 		using namespace std;
 		cout << "Looking at:" << endl;
 		cout << "L: " << lookingAt[0].x << ", " << lookingAt[0].y << endl;
@@ -68,7 +68,7 @@ void Ant::update(bool debug) {
  * Eg, if facing north at location [12, 15], then the function will return
  * the locations with x/y values: [
  */
-Location* Ant::isLookingAt(bool debug) {
+Location* Ant::isLookingAt() {
 
 	// The numer of directions is 8, so use that and mod algebra to figure out
 	// the directions to the right and left of the direction currently oriented.
@@ -77,9 +77,9 @@ Location* Ant::isLookingAt(bool debug) {
 
 	// Translate to new locations
 	Location *lookingAt = new Location[3];
-	lookingAt[0] = translateDirection(location, left, debug);
-	lookingAt[1] = translateDirection(location, dirOriented, debug);
-	lookingAt[2] = translateDirection(location, right, debug);
+	lookingAt[0] = translateDirection(location, left);
+	lookingAt[1] = translateDirection(location, dirOriented);
+	lookingAt[2] = translateDirection(location, right);
 
 	return lookingAt;
 }
@@ -88,21 +88,21 @@ Location* Ant::isLookingAt(bool debug) {
 /**
  * Moves the ant in the given direction.
  */
-void Ant::move(Direction direction, bool debug) {
+void Ant::move(Direction direction) {
 
-	if (debug) {
+	if (DEBUG) {
 		using namespace std;
 		cout << "X Location: " << location.x << endl;
 		cout << "Y Location: " << location.y << endl;
 	}
 
-	Location newLoc = translateDirection(location, direction, debug);
+	Location newLoc = translateDirection(location, direction);
 
 	// Set fields
 	location.x = newLoc.x;
 	location.y = newLoc.y;
 
-	if (debug) {
+	if (DEBUG) {
 		using namespace std;
 		cout << "Updated X: " << location.x << endl;
 		cout << "Updated Y: " << location.y << endl;
@@ -118,10 +118,10 @@ void Ant::move(Direction direction, bool debug) {
  * The given x and y will not be changed if the change would cause them to
  * go outside of the world frame.
  */
-Location Ant::translateDirection(const Location &loc, Direction direction, bool debug) {
+Location Ant::translateDirection(const Location &loc, Direction direction) {
 
 	// Print direction translating
-	if (debug) {
+	if (DEBUG) {
 		using namespace std;
 		cout << "Translating " << dirName(direction) << endl;
 	}

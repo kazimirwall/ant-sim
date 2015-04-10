@@ -13,11 +13,13 @@ using namespace std;
 int main() {
 	cout << "Lets make antz" << endl; // prints Lets make antz
 
-//	World *world = new World(10, 10);
-//	world->debug();
-//
-//	delete(world);
-//	world = 0;
+	World world(10, 10, true);
+
+	world.showGrid();
 
 	return 0;
 }
+
+
+
+

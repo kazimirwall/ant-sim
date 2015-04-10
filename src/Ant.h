@@ -21,25 +21,29 @@ private:
 	Direction dirOriented;
 	int ID;
 
+	// When the class is initialized with this set to true, "debug mode" will be
+	// activated, printing information with each method.
+	const bool DEBUG;
+
 	// Keeps track of the number of Ant objects made and delegates IDs
 	// in the constructor.
 	static int numAnts;
 
-	void move(Direction direction, bool debug = false);
+	void move(Direction direction);
 
-	Location translateDirection(const Location &loc, Direction direction, bool debug = false);
+	Location translateDirection(const Location &loc, Direction direction);
 
 public:
 
-	Ant(World pWorld, Location pLoc, Direction pOrient = NORTH);
+	Ant(World pWorld, Location pLoc, Direction pOrient = NORTH, bool debug = false);
 
 	virtual ~Ant();
 
-	void layPheromone(Pheromone pheromone, int amount, bool debug = false);
+	void layPheromone(Pheromone pheromone, int amount);
 
-	void update(bool debug = false);
+	void update();
 
-	Location* isLookingAt(bool debug = false);
+	Location* isLookingAt();
 };
 
 #endif /* ANT_H_ */
