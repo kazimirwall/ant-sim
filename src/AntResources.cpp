@@ -29,17 +29,19 @@ std::string dirName(Direction direction) {
 		case NORTHWEST:
 			return "Northwest";
 	}
+	return "";
 };
 
 
 /**
  * Returns the given pheromone as a string.
  */
-std::string pheromoneName(Pheromone pheromone) {
+std::string pheroName(Pheromone pheromone) {
 	switch (pheromone) {
 		case FOOD:
 			return "Food";
 		case HOME:
 			return "Home";
 	}
+	return "";
 };

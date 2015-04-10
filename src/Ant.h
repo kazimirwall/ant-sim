@@ -8,8 +8,8 @@
 #ifndef ANT_H_
 #define ANT_H_
 
-#include <iostream>
 #include <cassert>
+#include <iostream>
 #include "AntResources.h"
 #include "World.h"
 

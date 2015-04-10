@@ -41,7 +41,7 @@ enum Pheromone {
 };
 
 
-std::string pheromoneName(Pheromone pheromone);
+std::string pheroName(Pheromone pheromone);
 
 
 /**

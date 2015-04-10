@@ -7,7 +7,6 @@
 
 #include "Ant.h"
 
-
 int Ant::numAnts = 0;
 
 
@@ -39,7 +38,7 @@ void Ant::layPheromone(Pheromone pheromone, int amount, bool debug) {
 
 	if (debug) {
 		using namespace std;
-		cout << "Laying pheromone " << pheromoneName(pheromone) << " at location: ";
+		cout << "Laying pheromone " << pheroName(pheromone) << " at location: ";
 		cout << location.x << ", " << location.y << endl;
 	}
 
