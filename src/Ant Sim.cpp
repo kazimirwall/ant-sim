@@ -10,6 +10,8 @@
 #include "World.h"
 using namespace std;
 
+void *__gxx_personality_v0;
+
 int main() {
 	cout << "Lets make antz" << endl; // prints Lets make antz
 

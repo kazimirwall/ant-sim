@@ -10,23 +10,33 @@
 World::World(const int &height, const int &width, bool debug)
 		: HEIGHT(height), WIDTH(width), DEBUG(debug) {
 
+	using namespace std;
+
 	// Check inputs
 	assert(height > 0);
 	assert(width > 0);
 
 	// Create 2D grid data struct array
 	for (int i = 0; i < HEIGHT; i++) {
-		std::vector<GridData> gridRow;
+		vector<GridData> row;
 		for (int j = 0; j < WIDTH; j++) {
 			GridData g;
-			gridRow.push_back(g);
+			g.foodPheromone = 0;
+			g.homePheromone = 0;
+			g.isHive = false;
+			g.nFood = 0;
+			row.push_back(g);
 		}
+		gridData.push_back(row);
 	}
 
+
+	// Debugging output
 	if (DEBUG) {
-		using namespace std;
 		cout << "Height: " << HEIGHT << endl;
 		cout << "Width:  " << WIDTH << endl;
+		cout << "gridData size: " << gridData.size() << endl;
+		cout << "gridData[0] size: " << gridData[0].size() << endl;
 	}
 }
 
@@ -60,17 +70,27 @@ void World::showGrid() {
 
 	using namespace std;
 
+	// Prints out information for each grid point
+//	for (int i = 0; i < HEIGHT; i++) {
+//		for (int j = 0; j < WIDTH; j++) {
+//			GridData g = gridData[i][j];
+//			cout << "Location " << i << ", " << j << ": " << endl;
+//			cout << "Food Pheromone: " << g.foodPheromone << endl;
+//			cout << "Home Pheromone: " << g.homePheromone << endl;
+//			cout << "isHive:         " << g.isHive << endl;
+//			cout << "nFood:          " << g.nFood << endl;
+//		}
+//	}
 
-	// Todo there seems to be some strange issue here
-	for (int i = 0; i < WIDTH; i++) {
-		std::vector<GridData> gridRow = gridData[i];
-		for (int j = 0; j < HEIGHT; j++) {
-			GridData gridPoint = gridRow[j];
-			cout << "Location " << i << ", " << j << ": " << endl;
-			cout << "Food Pheromone: " << gridPoint.foodPheromone << endl;
-			cout << "Home Pheromone: " << gridPoint.homePheromone << endl;
-			cout << "isHive:         " << gridPoint.isHive << endl;
-			cout << "nFood:          " << gridPoint.nFood << endl;
+	cout << "Test" << endl;
+	for (auto &row : gridData) {
+		for (auto &col : row) {
+			cout << "F" << col.foodPheromone;
+			cout << "H" << col.homePheromone;
+			cout << "L" << col.isHive;
+			cout << "N" << col.nFood << " ";
 		}
+		cout << endl;
 	}
+	cout << "Test 2" << endl;
 }
