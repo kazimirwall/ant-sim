@@ -16,7 +16,7 @@
 class Ant {
 private:
 
-	World world;
+	World *world;			// I use a pointer here so that each ant doesn't copy the world
 	Location location;
 	Direction dirOriented;
 	int ID;
@@ -35,7 +35,7 @@ private:
 
 public:
 
-	Ant(World pWorld, Location pLoc, Direction pOrient = NORTH, bool debug = false);
+	Ant(World *pWorld, Location pLoc, Direction pOrient = NORTH, bool debug = false);
 
 	virtual ~Ant();
 
@@ -43,7 +43,7 @@ public:
 
 	void update();
 
-	Location* isLookingAt();
+	std::vector<Location> isLookingAt();
 };
 
 #endif /* ANT_H_ */

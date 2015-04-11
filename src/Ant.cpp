@@ -10,7 +10,7 @@
 int Ant::numAnts = 0;
 
 
-Ant::Ant(World pWorld, Location pLoc, Direction pOrient, bool debug)
+Ant::Ant(World *pWorld, Location pLoc, Direction pOrient, bool debug)
 		: world(pWorld), location(pLoc), dirOriented(pOrient), DEBUG(debug) {
 
 	// Check inputs
@@ -42,23 +42,21 @@ void Ant::layPheromone(Pheromone pheromone, int amount) {
 		cout << location.x << ", " << location.y << endl;
 	}
 
-	world.deltaPheromone(pheromone, location, amount);
+	world->deltaPheromone(pheromone, location, amount);
 }
 
 
 void Ant::update() {
-	Location *lookingAt = isLookingAt();
+	using namespace std;
+
+	vector<Location> lookingAt = isLookingAt();
 
 	if (DEBUG) {
-		using namespace std;
 		cout << "Looking at:" << endl;
 		cout << "L: " << lookingAt[0].x << ", " << lookingAt[0].y << endl;
 		cout << "C: " << lookingAt[1].x << ", " << lookingAt[1].y << endl;
 		cout << "R: " << lookingAt[2].x << ", " << lookingAt[2].y << endl;
 	}
-
-	delete(lookingAt);
-	lookingAt = 0;
 }
 
 
@@ -68,15 +66,17 @@ void Ant::update() {
  * Eg, if facing north at location [12, 15], then the function will return
  * the locations with x/y values: [
  */
-Location* Ant::isLookingAt() {
+std::vector<Location> Ant::isLookingAt() {
+
+	using namespace std;
 
 	// The numer of directions is 8, so use that and mod algebra to figure out
 	// the directions to the right and left of the direction currently oriented.
-	Direction left = (Direction) ((dirOriented - 1) % NUM_DIRECTIONS);
+	Direction left = (Direction) ((dirOriented + 1) % NUM_DIRECTIONS);
 	Direction right = (Direction) ((dirOriented - 1) % NUM_DIRECTIONS);
 
 	// Translate to new locations
-	Location *lookingAt = new Location[3];
+	vector<Location> lookingAt(3);
 	lookingAt[0] = translateDirection(location, left);
 	lookingAt[1] = translateDirection(location, dirOriented);
 	lookingAt[2] = translateDirection(location, right);
@@ -136,27 +136,27 @@ Location Ant::translateDirection(const Location &loc, Direction direction) {
 				y--;
 			break;
 		case NORTHEAST:
-			if (x < world.getWidth() - 1)
+			if (x < world->getWidth() - 1)
 				x++;
 			if (y > 0)
 				y--;
 			break;
 		case EAST:
-			if (x < world.getWidth() - 1)
+			if (x < world->getWidth() - 1)
 				x++;
 			break;
 		case SOUTHEAST:
-			if (x < world.getWidth() - 1)
+			if (x < world->getWidth() - 1)
 				x++;
-			if (y < world.getWidth() - 1)
+			if (y < world->getWidth() - 1)
 				y++;
 			break;
 		case SOUTH:
-			if (y < world.getWidth() - 1)
+			if (y < world->getWidth() - 1)
 				y++;
 			break;
 		case SOUTHWEST:
-			if (y < world.getWidth() - 1)
+			if (y < world->getWidth() - 1)
 				y++;
 			if (x > 0)
 				x--;

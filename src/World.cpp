@@ -52,15 +52,15 @@ World::~World() {
  */
 void World::deltaPheromone(Pheromone pheromone, Location location, int change) {
 	// Create a reference to the grid location for easy access following
-	GridData &gridLoc = gridData[location.y][location.x];
+	GridData &point = gridData[location.y][location.x];
 
 	// Depending on pheromone
 	switch (pheromone) {
 	case FOOD:
-		gridLoc.homePheromone += change;
+		point.foodPheromone += change;
 		break;
 	case HOME:
-		gridLoc.foodPheromone += change;
+		point.homePheromone += change;
 		break;
 	}
 }
